@@ -1,0 +1,5 @@
+model,accuracy,roc_auc,log_loss
+Decision Tree,0.646,0.7029,0.6228
+Random Forest,0.6447,0.716,0.6143
+XGBoost,0.6554,0.7216,0.6096
+Neural Network,0.6504,0.7243,0.6095

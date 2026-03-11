@@ -1,0 +1,96 @@
+============================================================
+TENNIS MATCH PREDICTION - TRAINING REPORT
+Generated: 2026-03-11 21:57:33
+============================================================
+
+--- Decision Tree ---
+Accuracy: 0.6460
+ROC-AUC:  0.7029
+Log Loss: 0.6228
+Confusion Matrix:
+[[ 907  581]
+ [ 470 1011]]
+Classification Report:
+  Class 0: precision=0.659, recall=0.610, f1=0.633
+  Class 1: precision=0.635, recall=0.683, f1=0.658
+
+--- Random Forest ---
+Accuracy: 0.6447
+ROC-AUC:  0.7160
+Log Loss: 0.6143
+Confusion Matrix:
+[[939 549]
+ [506 975]]
+Classification Report:
+  Class 0: precision=0.650, recall=0.631, f1=0.640
+  Class 1: precision=0.640, recall=0.658, f1=0.649
+
+--- XGBoost ---
+Accuracy: 0.6554
+ROC-AUC:  0.7216
+Log Loss: 0.6096
+Confusion Matrix:
+[[ 942  546]
+ [ 477 1004]]
+Classification Report:
+  Class 0: precision=0.664, recall=0.633, f1=0.648
+  Class 1: precision=0.648, recall=0.678, f1=0.662
+
+--- Neural Network ---
+Accuracy: 0.6504
+ROC-AUC:  0.7243
+Log Loss: 0.6095
+Confusion Matrix:
+[[938 550]
+ [488 993]]
+Classification Report:
+  Class 0: precision=0.658, recall=0.630, f1=0.644
+  Class 1: precision=0.644, recall=0.670, f1=0.657
+
+
+BEST MODEL: XGBoost (accuracy=0.6554)
+
+Feature columns (43):
+  - p1_elo
+  - p2_elo
+  - p1_surface_elo
+  - p2_surface_elo
+  - elo_diff
+  - surface_elo_diff
+  - total_elo
+  - h2h_p1_wins
+  - h2h_p2_wins
+  - h2h_diff
+  - age_diff
+  - height_diff
+  - rank_diff
+  - rank_points_diff
+  - best_of
+  - round_num
+  - surface_Hard
+  - surface_Clay
+  - surface_Grass
+  - tourney_G
+  - tourney_M
+  - tourney_A
+  - p1_avg_1stServeWinPct
+  - p2_avg_1stServeWinPct
+  - p1_avg_bpSavedPct
+  - p2_avg_bpSavedPct
+  - p1_avg_acePct
+  - p2_avg_acePct
+  - serve_1stWinPct_diff
+  - serve_bpSavedPct_diff
+  - serve_acePct_diff
+  - p1_winrate_last_10
+  - p2_winrate_last_10
+  - winrate_diff_last_10
+  - p1_winrate_last_25
+  - p2_winrate_last_25
+  - winrate_diff_last_25
+  - p1_winrate_last_50
+  - p2_winrate_last_50
+  - winrate_diff_last_50
+  - p1_winrate_last_100
+  - p2_winrate_last_100
+  - winrate_diff_last_100
