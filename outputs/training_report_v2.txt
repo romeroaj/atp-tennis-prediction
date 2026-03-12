@@ -1,0 +1,67 @@
+============================================================
+TENNIS V2 TRAINING REPORT
+============================================================
+
+Train: 2005-2023 (54250 matches)
+Test: 2024 (2969 matches)
+Features: 64
+
+V2 IMPROVEMENTS:
+  - Dynamic K-factor ELO (FiveThirtyEight style)
+  - Margin of Victory ELO
+  - WElo momentum
+  - Inactivity decay
+  - Fatigue features
+  - Surface-specific win rates
+  - Tournament history
+  - 2nd serve + DF stats
+  - Optuna Bayesian tuning
+  - LightGBM + Blend ensemble
+  - Modern era training (2005+)
+
+--- XGBoost (Optuna) ★ BEST ---
+Acc: 0.6548 | AUC: 0.7225 | LL: 0.6087
+
+--- LightGBM (Optuna) ---
+Acc: 0.6548 | AUC: 0.7201 | LL: 0.6108
+
+--- Blend (w=0.5) ---
+Acc: 0.6524 | AUC: 0.7219 | LL: 0.6092
+
+V1 baseline: 0.6554 accuracy
+V2 best: 0.6548 (XGBoost (Optuna))
+Improvement: -0.1 pp
+
+XGB params: {
+  "n_estimators": 481,
+  "max_depth": 4,
+  "learning_rate": 0.03717759406022728,
+  "subsample": 0.6071847502459279,
+  "colsample_bytree": 0.5072835039169765,
+  "reg_alpha": 0.8014815151481379,
+  "reg_lambda": 1.4253922895644522,
+  "min_child_weight": 2
+}
+LGB params: {
+  "n_estimators": 211,
+  "num_leaves": 37,
+  "max_depth": 4,
+  "learning_rate": 0.04349509773823687,
+  "subsample": 0.7737425087025646,
+  "colsample_bytree": 0.6719993564131295,
+  "reg_alpha": 1.1522299376993221,
+  "reg_lambda": 0.04088064840667478,
+  "min_child_samples": 31
+}
+
+Top 10 features:
+  surface_elo_diff: 0.1436
+  elo_diff: 0.1351
+  rank_points_diff: 0.0556
+  rank_diff: 0.0481
+  surface_winrate_diff: 0.0374
+  winrate_diff_last_100: 0.0253
+  winrate_diff_last_50: 0.0193
+  is_retirement: 0.0179
+  best_of: 0.0163
+  p1_surface_elo: 0.0162

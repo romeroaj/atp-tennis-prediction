@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI tool for predicting tennis match outcomes.
+"""V2 CLI tool for predicting tennis match outcomes.
 
 Usage:
     python predict_match.py "Jannik Sinner" "Carlos Alcaraz" "Hard"
@@ -17,7 +17,7 @@ MODELS_DIR = os.path.join(os.path.dirname(__file__), "models")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Predict a tennis match outcome")
+    parser = argparse.ArgumentParser(description="V2 Tennis match prediction")
     parser.add_argument("player1", type=str, help="Name of player 1")
     parser.add_argument("player2", type=str, help="Name of player 2")
     parser.add_argument("surface", type=str, choices=["Hard", "Clay", "Grass"],
@@ -28,10 +28,11 @@ def main():
                         help="Round (R128, R64, R32, R16, QF, SF, F)")
     parser.add_argument("--level", type=str, default="M",
                         help="Tournament level: G=Grand Slam, M=Masters, A=ATP")
+    parser.add_argument("--tourney", type=str, default="",
+                        help="Tournament name (for history features)")
     args = parser.parse_args()
 
-    # Load artifacts
-    print("Loading model and data...")
+    print("Loading V2 model and data...")
     from src.predict import predict_match, load_prediction_artifacts
 
     model, feature_cols = load_prediction_artifacts()
@@ -40,21 +41,20 @@ def main():
     overall_elo = joblib.load(os.path.join(MODELS_DIR, "overall_elo.joblib"))
     surface_elo = joblib.load(os.path.join(MODELS_DIR, "surface_elo.joblib"))
 
-    # Make prediction
     result = predict_match(
         args.player1, args.player2, args.surface,
         matches, players, overall_elo, surface_elo,
         model=model, feature_cols=feature_cols,
         best_of=args.best_of, round_name=args.round, tourney_level=args.level,
+        tourney_name=args.tourney,
     )
 
     if "error" in result:
         print(f"Error: {result['error']}")
         sys.exit(1)
 
-    # Display results
     print(f"\n{'='*50}")
-    print(f"  MATCH PREDICTION")
+    print(f"  V2 MATCH PREDICTION")
     print(f"{'='*50}")
     print(f"  {result['p1_name']} vs {result['p2_name']}")
     print(f"  Surface: {result['surface']}")

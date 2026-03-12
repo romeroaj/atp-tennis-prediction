@@ -6,5 +6,5 @@ dist/
 build/
 .env
 venv/
-data/processed_features.csv
+data/
 models/*.joblib
